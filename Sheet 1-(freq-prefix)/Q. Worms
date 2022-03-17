@@ -1,105 +1,36 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <bits/stdc++.h>
-
-#define all(x) x.begin(),x.end()
-
-#define ll_str(x,y) stringstream sdf;sdf<<x;string str=sdf.str();y=str;
-
-#define str_ll(x,y) stringstream sstr(x);ll val;sstr>>val;y=val;
-
-int dx[] = { 0, 0, 1, -1, 1, -1, 1, -1 };
-
-int dy[] = { 1, -1, 0, 0, -1, 1, 1, -1 };
-
-#define MaTb3aa ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-#define all(v)          ((v).begin()), ((v).end())
-
-typedef long long ll;
-
-#define endl  "\n"
-
-/*MaTb3aa ^_^*/
-
+#include<iostream>
+#define stpr(n)fixed<<setprecision(n)
+#define RT(x)           return cout<<x,0;
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
-
-void run(){
-
-#ifndef ONLINE_JUDGE
-
-	freopen("in.txt", "r", stdin);
-
-#endif
-
-}
-
-int main()
-
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+1e5 ;
+ll pref[N];
+int arr[N];
+int main ()
 {
 
-	//run();
+    int n, l  ;
+    cin >> n ;
+    vector < ll  > v ;
+    for(int i=1; i<=n; i++)
+        cin >> arr[i];
+    int q ;
+    cin>>q ;
+    pref[0]=1 ;
+    for(int i=1; i<=n; i++) {
+        pref[i]+=pref[i-1]+arr[i];
+        v.push_back (pref[i]-1);
+    }
+    while(q--) {
+        cin >>  l ;
+        auto t= lower_bound (v.begin(), v.end(), l);
+        cout << t-v.begin()+1<< " ";
+    }
 
-	MaTb3aa
 
-		int n;
-
-	ll sum = 0;
-
-	cin >> n;
-
-	vector<int>input(n);
-
-	vector<pair<int, int>>v(n);
-
-	vector<int>ans(n);
-
-	for (int i = 0; i < n; i++)cin >> input[i];
-
-	v[0].first = 1;
-
-	v[0].second = input[0];
-
-	ans[0] = v[0].second;
-
-	sum = input[0];
-
-	for (int i = 1; i < n; i++){
-
-		sum += input[i];
-
-		v[i].first = v[i - 1].second + 1;
-
-		v[i].second = sum;
-
-		ans[i] = v[i].second;
-
-	}
-
-	int  q, x;
-
-	cin >> q;
-
-	while (q--)
-
-	{
-
-		cin >> x;
-
-		int idx = upper_bound(all(ans), x) - ans.begin();
-
-		if (idx < n){
-
-			if (x >= v[idx].first&&x <= v[idx].second)cout << idx + 1 << endl;
-
-			else cout << idx << endl;
-
-		}
-
-		else cout << idx << endl;
-
-		
-
-	}
 
 }
