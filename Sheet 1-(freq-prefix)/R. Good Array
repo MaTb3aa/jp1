@@ -1,89 +1,64 @@
-/***  بسم الله الرحمن ا لرحيم   ***/
-
-#define _CRT_SECURE_NO_WARNINGS
-
-#include<bits/stdc++.h>
-
-#include<unordered_map>
-
-#define endl                         '\n'
-
-#define Ceil(x,y)             ((x+y-1)/y)
-
-#define sz(s)               (int)s.size()
-
+#include <bits/stdc++.h>
+#include<iostream>
+#define stpr(n)fixed<<setprecision(n)
 #define RT(x)           return cout<<x,0;
-
-#define mem(x,y)    memset(x,y,sizeof(x))
-
-#define all(v) ((v).begin()), ((v).end())
-
-#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
-
-#define test int t;cin>>t;while(t--)
-
-const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
-
-const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
-
-const double PI = acos(-1), EPS = 1e-7;
-
-const int OO = 0x3f3f3f3f, N = 2e5 + 5, mod = 1e9 + 7;
-
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+2e5 ;
+ll prefix_max_start[N];
+ll prefix_max_end[N];
+ll arr[N];
+int main ()
+{
 
-typedef long long ll;
+    int n;
+    // 2 5 1 2 2
+    ll sum=0, mx=-1;
+    cin >> n ;
+    vector < ll  > v ;
+    for(int i=1; i<=n; i++) {
+        cin >> arr[i];
+        sum+=arr[i];
+    }
+    for(int i=1; i<=n; i++) {
 
-typedef unsigned long long ull;
+        prefix_max_start[i]=max(arr[i], mx );
+        mx= prefix_max_start[i] ;
+    }
+    mx=-1;
+    for(int i=n; i>=1; i--) {
+        prefix_max_end[i]= max(arr[i], mx);
+        mx=prefix_max_end[i];
 
-ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
+    }
 
-ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
+    int cnt=0 ;
+    for(int i=1; i<=n; i++) {
+        sum-=arr[i];
+        if(i==1 && sum -prefix_max_end[i] ==prefix_max_end[i]) {
+            cnt++;
+            v.push_back(i);
 
-void file() {
+        } else if ( i ==n && sum-prefix_max_start[n-1]==prefix_max_start[n-1]) {
+            cnt++;
+            v.push_back(i);
+        } else {
+            ll mx2 = max(prefix_max_end[i+1],prefix_max_start[i-1]);
+            if(sum-mx2 == mx2) {
+                v.push_back(i);
+                cnt++;
+            }
 
-#ifndef ONLINE_JUDGE
+        }
 
-	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
+        sum+=arr[i];
+    }
+    cout << cnt << '\n';
+    for(int i=0; i<cnt; i++)cout << v[i]<< " ";
 
-#endif  !ONLINEJUDGE
 
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-}
-
-int main() {
-
-	file();
-
-	int n; cin >> n;
-
-	map<ll, ll>mp;
-
-	ll sum = 0;
-
-	vector<ll>v(n),vv;
-
-	for (auto& t : v)cin >> t,sum+=t,mp[t]++;
-
-	for (int i = 0; i < n; i++) {
-
-		sum -= v[i];
-
-		mp[v[i]]--;
-
-		if (mp[sum/2] > 0&&sum%2==0)vv.push_back(i + 1);
-
-		sum += v[i];
-
-		mp[v[i]]++;
-
-	}
-
-	cout << sz(vv) << endl;
-
-	for (auto t : vv)cout << t << " ";
-
-	return 0;
 
 }
