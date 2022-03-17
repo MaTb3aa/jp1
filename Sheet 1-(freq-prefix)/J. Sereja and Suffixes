@@ -1,87 +1,37 @@
-/***  بسم الله الرحمن ا لرحيم   ***/
-
-#define _CRT_SECURE_NO_WARNINGS
-
-#include<bits/stdc++.h>
-
-#include<unordered_map>
-
-#define endl                         '\n'
-
-#define Ceil(x,y)             ((x+y-1)/y)
-
-#define sz(s)               (int)s.size()
-
+#include <bits/stdc++.h>
+#include<iostream>
+#define stpr(n)fixed<<setprecision(n)
 #define RT(x)           return cout<<x,0;
-
-#define mem(x,y)    memset(x,y,sizeof(x))
-
-#define all(v) ((v).begin()), ((v).end())
-
-#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
-
-#define test int t;cin>>t;while(t--)
-
-const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
-
-const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
-
-const double PI = acos(-1), EPS = 1e-7;
-
-const int OO = 0x3f3f3f3f, N = 2e5 + 5, mod = 1e9 + 7;
-
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+1e5 ;
+string ys = "YES", no = "NO";
+int pref[N];
+int fre[N];
+int arr[N];
+int main ()
+{
+    fast ;
+    int n,m, l;
+    cin >> n >> m ;
+    for(int i=1; i<=n; i++)
+        cin >> arr[i];
+    for(int i=n; i>=1; i--) {
+        if(fre[arr[i]]==0) {
+            pref[i]+=pref[i+1]+1;
+            fre[arr[i]]++;
 
-typedef long long ll;
-
-typedef unsigned long long ull;
-
-ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
-
-ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
-
-void file() {
-
-#ifndef ONLINE_JUDGE
-
-	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
-
-#endif  !ONLINEJUDGE
-
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
+        } else {
+            pref[i]+=pref[i+1];
+        }
+    }
+    while(m--) {
+        cin >> l ;
+        cout << pref[l]<< '\n';
+    }
 }
 
-int vis[N],f[N];
 
-int main() {
-
-	file();
-
-	int n, m;
-
-	cin >> n >> m;
-
-	vector<int>v(n+1);
-
-	for (int i = 1; i <= n; i++)cin >> v[i];
-
-	for (int i = n; i >= 1; i--) {
-
-		if (!vis[v[i]]) { f[i]++; vis[v[i]]++; }
-
-		f[i] += f[i + 1];
-
-	}
-
-	while (m--) {
-
-		int x; cin >> x;
-
-		cout << f[x] << endl;
-
-	}
-
-	return 0;
-
-}
