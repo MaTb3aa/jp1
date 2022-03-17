@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+int freq [30];
+
+int main()
+
+{
+
+    int i = 0,n;
+
+    cin>>n;
+
+    char c;
+
+    while (n--)
+
+    {
+
+        cin>>c;
+
+        if (c>=97)
+
+            freq[c - 'a']++;
+
+        else
+
+            freq[c - 'A']++;
+
+    }
+
+    for (i = 0; i < 26; i++)
+
+    {
+
+        if (freq[i]<=0 )
+
+        {
+
+            return cout<<"NO", 0;
+
+        }
+
+    }
+
+    cout<<"YES" ;
+
+    return 0;
+
+}
