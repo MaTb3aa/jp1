@@ -1,0 +1,127 @@
+/***  بسم الله الرحمن ا لرحيم   ***/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<bits/stdc++.h>
+
+#include<unordered_map>
+
+#define endl                         '\n'
+
+#define Ceil(x,y)             ((x+y-1)/y)
+
+#define sz(s)               (int)s.size()
+
+#define RT(x)           return cout<<x,0;
+
+#define mem(x,y)    memset(x,y,sizeof(x))
+
+#define all(v) ((v).begin()), ((v).end())
+
+#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
+
+#define test int t;cin>>t;while(t--)
+
+const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
+
+const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
+
+const double PI = acos(-1), EPS = 1e-7;
+
+const int OO = 0x3f3f3f3f, N = 2e5 + 5, mod = 1e9 + 7;
+
+using namespace std;
+
+typedef long long ll;
+
+typedef unsigned long long ull;
+
+ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
+
+ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
+
+void file() {
+
+#ifndef ONLINE_JUDGE
+
+	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
+
+#endif  !ONLINEJUDGE
+
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+}
+
+int R[N], L[N], cur[N];
+
+bool ok(ll md,int a,int b,int c) {
+
+	return (a >= md * (md + 1) / 2 && b >= md * (md + 1) / 2 && c >= md * (md - 1) / 2);
+
+}
+
+int main() {
+
+	file();
+
+	string s; cin >> s;
+
+	s = '*' + s;
+
+	for (int i = 1; i <= sz(s); i++) {
+
+		if (s[i] == '/')L[i]++;
+
+		if (s[i] == '\\')R[i]++;
+
+		if (s[i] == '_')cur[i]++;
+
+		L[i] += L[i - 1];
+
+		R[i] += R[i - 1];
+
+		cur[i] += cur[i - 1];
+
+	}
+
+	int q; cin >> q;
+
+	while (q--) {
+
+		int l, r; cin >> l >> r;
+
+		int a = L[r] - L[l - 1];
+
+		int b = R[r] - R[l - 1];
+
+		int c = cur[r] - cur[l - 1];
+
+	//	cout << a << " " << b << " " << c << endl;
+
+		int st = 0, ed = 1e5, ans=0, md;
+
+		while (st <= ed) {
+
+			md = st + ed >> 1;
+
+		//	cout << md << " " << ok(md, a, b, c) << endl;
+
+			if (ok(md, a, b, c)) {
+
+				ans = md;
+
+				st = md + 1;
+
+			}
+
+			else ed = md - 1;
+
+		}
+
+		cout << ans << endl;
+
+	}
+
+	return 0;
+
+}
