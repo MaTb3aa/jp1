@@ -1,0 +1,239 @@
+//============================================================================
+
+// Name        : ICPC.cpp
+
+// Author      : MaTb3aa
+
+// Quotes      : Nothing is impossible, the word itself says 'I'm possible'!.
+
+// Copyright   : Audrey Hepburn
+
+// Description : You Can Do It
+
+//============================================================================
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
+
+#include <cstdio>
+
+#include <algorithm>
+
+#include <vector>
+
+#include <map>
+
+#include <set>
+
+#include <bitset>
+
+#include <cmath>
+
+#include <stack>
+
+#include <string>
+
+#include <iomanip>
+
+#include <queue>
+
+#include <deque>
+
+#include <cstring>
+
+#include <limits>
+
+#include <sstream>
+
+#include <stdio.h>
+
+#include<unordered_map>
+
+#include <string>
+
+#define P(x)     cout<<"\n\n*****"<<x<<"****\n\n";
+
+#define RT(x)    return cout<<x,0;
+
+const int N = 1.5 * 10000000 + 16, M = 1e5, OO = 0x3f3f3f3f, mod = 1e9 + 7;
+
+#define all(v) ((v).begin()), ((v).end())
+
+int dx[] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+
+int dy[] = { 1, -1, 0, 0, -1, 1, 1, -1 };
+
+#define mem(x,y) memset(x,y,sizeof(x))
+
+const double PI = acos(-1.0);
+
+using namespace std;
+
+typedef long long ll;
+
+typedef vector<bool> ve;
+
+#define endl '\n'	ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x%y); }
+
+ll lcm(ll x, ll y) { return ((x / gcd(x, y))*y); }
+
+void file() {
+
+#ifndef ONLINE_JUDGE
+
+	freopen("input.txt", "r", stdin);
+
+	freopen("output.txt", "w", stdout);
+
+#endif  !ONLINEJUDGE
+
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+}
+
+int main() {
+
+	file();
+
+	string s; cin >> s;
+
+	map<char, int>mp;
+
+	for (char ch = 'a'; ch <= 'z'; ch++) {
+
+		int x; cin >> x; mp[ch] = x;
+
+	}
+
+	string d = ""; s += '*';
+
+	int ctr = 0;
+
+	for (int i = 0; i < s.size()-1; i++) {
+
+		if (s[i] == '?'&&s[i + 1] == '?')continue;
+
+		else if (s[i] == '?'&&s[i + 1] != '?') {
+
+			ctr++; d += s[i];
+
+		}
+
+		else d += s[i];
+
+	}
+
+	s.pop_back();
+
+	vector<char>v;
+
+	if (ctr == d.size()) {
+
+		cout << 0 << endl;
+
+		for (auto t : s)cout << "a";
+
+		return 0;
+
+	}
+
+	d += '*';
+
+	d = '*' + d;
+
+	for (int i = 1; i < d.size()-1; i++) {
+
+		if (d[i] == '?') {
+
+			if (isalpha(d[i - 1]) && isalpha(d[i + 1])) {
+
+				int cur = 1e9;
+
+				for (char ch = 'a'; ch <= 'z'; ch++) {
+
+					int sum = abs(mp[d[i - 1]] - mp[ch]);
+
+					sum += abs(mp[ch] - mp[d[i + 1]]);
+
+					if (sum < cur) { cur = sum; d[i] = ch; }
+
+				}
+
+				v.push_back(d[i]);
+
+			}
+
+			else if (isalpha(d[i + 1])) {
+
+				int cur = 1e9;
+
+				for (char ch = 'a'; ch <= 'z'; ch++) {
+
+					int sum = abs(mp[d[i + 1]] - mp[ch]);
+
+					if (sum < cur) { cur = sum; d[i] = ch; }
+
+				}
+
+				v.push_back(d[i]);
+
+			}
+
+			else if (isalpha(d[i - 1])) {
+
+				int cur = 1e9;
+
+				for (char ch = 'a'; ch <= 'z'; ch++) {
+
+					int sum = abs(mp[d[i - 1]] - mp[ch]);
+
+					if (sum < cur) { cur = sum; d[i] = ch; }
+
+				}
+
+				v.push_back(d[i]);
+
+			}
+
+		}
+
+	}
+
+	reverse(all(v));
+
+	for (int i = 0; i < s.size(); i++) {
+
+		bool ok = 0;
+
+		if (s[i] == '?') {
+
+			s[i] = v.back(); ok = 1;
+
+		}
+
+		 if (s[i + 1] != '?'&&ok) {
+
+			v.pop_back();
+
+		}
+
+	}
+
+	ll sum = 0;
+
+	for (int i = 1; i < s.size() ; i++) {
+
+		sum += abs(mp[s[i]] - mp[s[i - 1]]);
+
+	}
+
+	cout << sum << endl;
+
+	cout << s << endl;
+
+	
+
+	
+
+}
