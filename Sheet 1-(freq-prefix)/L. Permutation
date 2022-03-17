@@ -1,1 +1,49 @@
+#include <bits/stdc++.h>
+#include<iostream>
+#define stpr(n)fixed<<setprecision(n)
+#define RT(x)           return cout<<x,0;
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+1e5 ;
+string ys = "YES", no = "NO";
+int pref_min_start[N];
+int pref_min_end[N];
+int arr[N];
+int main ()
+{
+    freopen("mex.in",  "r",  stdin);
+    fast ;
+    int t ;
+    cin >> t ;
+    while( t--)
+    {
+        int n, q, l, r  ;
+        cin >> n >>  q;
+        for(int i=1; i<=n; i++)
+            cin >> arr[i];
 
+        pref_min_start[0]=arr[1];
+        pref_min_end[n+1]=arr[n];
+        for(int i=1; i<=n; i++)
+            pref_min_start[i]=min(arr[i], pref_min_start[i-1]);
+
+        for(int i=n; i>=1; i--)
+            pref_min_end[i]=min(arr[i], pref_min_end[i+1]);
+
+        while(q--)
+        {
+            cin >> l >> r ;
+            if(l==1 && r >= n)cout << n+1;
+            else if( l >1 && r >=n )cout << pref_min_start[l-1];
+            else if (l==1 && r<n )cout << pref_min_end[r+1];
+            else
+            {
+                cout << min( pref_min_start[l-1], pref_min_end[r+1]);
+            }
+            cout << '\n';
+        }
+    }
+}
