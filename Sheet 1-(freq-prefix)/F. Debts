@@ -1,93 +1,25 @@
-/***  بسم الله الرحمن ا لرحيم   ***/
-
-#define _CRT_SECURE_NO_WARNINGS
-
-#include<bits/stdc++.h>
-
-#include<unordered_map>
-
-#define endl                         '\n'
-
-#define Ceil(x,y)             ((x+y-1)/y)
-
-#define sz(s)               (int)s.size()
-
-#define RT(x)           return cout<<x,0;
-
-#define mem(x,y)    memset(x,y,sizeof(x))
-
-#define all(v) ((v).begin()), ((v).end())
-
-#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
-
-#define test int t;cin>>t;while(t--)
-
-const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
-
-const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
-
-const double PI = acos(-1), EPS = 1e-7;
-
-const int OO = 0x3f3f3f3f, N = 1e6 + 5, mod = 1e9 + 7;
-
+#include <bits/stdc++.h>
 using namespace std;
-
-typedef long long ll;
-
-typedef unsigned long long ull;
-
-ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
-
-ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
-
-void file() {
-
-#ifndef ONLINE_JUDGE
-
-	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
-
-#endif  !ONLINEJUDGE
-
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-}
-
-int main() {
-
-	file();
-
-	int n, m;
-
-	cin >> n >> m;
-
-	vector<ll>v(n);
-
-	for (auto& t : v)cin >> t;
-
-	while (m--) {
-
-		int x, y, z;
-
-		cin >> x >> y >> z;
-
-		--x; --y;
-
-		v[x] -= z; v[y] += z;
-
-	}
-
-	bool k = 1;
-
-	for (auto t : v) {
-
-		if (t < 0)k = 0;
-
-	}
-
-	if (!k)RT("NO");
-
-	RT("YES");
-
-	return 0;
+long long arr[100005];
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n,m;
+    cin>>n>>m;
+    for(int i=1; i<=n; i++) cin>>arr[i];
+    int y,x,z;
+    while(m--)
+    {
+        cin>>y>>x>>z;
+        arr[y]-=z;
+        arr[x]+=z;
+    }
+    for(int i=1; i<=n; i++)
+    {
+        if(arr[i]<0) return cout<<"NO",0;
+    }
+    cout<<"YES";
 
 }
