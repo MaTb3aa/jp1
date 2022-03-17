@@ -1,91 +1,55 @@
-/***  بسم الله الرحمن ا لرحيم   ***/
-
-#define _CRT_SECURE_NO_WARNINGS
-
-#include<bits/stdc++.h>
-
-#include<unordered_map>
-
-#define endl                         '\n'
-
-#define Ceil(x,y)             ((x+y-1)/y)
-
-#define sz(s)               (int)s.size()
-
+#include <bits/stdc++.h>
+#define endl '\n'
+#define r_all(v)  v.rbegin(),v.rend()
+#define all(v)  v.begin(),v.end()
+#define stpr(n)fixed<<setprecision(n)
 #define RT(x)           return cout<<x,0;
-
-#define mem(x,y)    memset(x,y,sizeof(x))
-
-#define all(v) ((v).begin()), ((v).end())
-
-#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
-
-#define test int t;cin>>t;while(t--)
-
-const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
-
-const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
-
-const double PI = acos(-1), EPS = 1e-7;
-
-const int OO = 0x3f3f3f3f, N = 2e5 + 5, mod = 1e9 + 7;
-
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
 using namespace std;
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+1e3 ;
+string ys = "YES", no = "NO";
 
-typedef long long ll;
+// keep it short & sample (KISS)
+int arr[N][N];
 
-typedef unsigned long long ull;
+int main ()
+{
+    fast;
+    int n, x ;
+    cin>>n;
+    bool found2 = true;
+    for(int i=0; i<n; i++)
+    {
+        int freq[n+1]= {0};
+        for(int j=0; j<n; j++)
+        {
+            cin>>x;
+            arr[i][j]=x;
+            freq[x]++;
+        }
+        bool found = true ;
+        for(int i=1; i<=n; i++)
+        {
+            if(freq[i]>1)
+            {
+                found = false ;
+                break;
+            }
+        }
+        if(found &&found2)
+        {
+            for(int x=0; x<n; x++)
+            {
+                if(arr[i][x]==0)
+                    cout << n << " ";
+                else cout <<arr[i][x]<< " ";
+            }
+            found2=false ;
 
-ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
-
-ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
-
-void file() {
-
-#ifndef ONLINE_JUDGE
-
-	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
-
-#endif  !ONLINEJUDGE
-
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-}
-
-int arr[55][55];
-
-int ans[55];
-
-int n, mx;
-
-bool vis;
-
-int main() {
-
-	file();
-
-	cin >> n;
-
-	for (int i = 0; i < n; i++) {
-
-		mx = 0;
-
-		for (int j = 0; j < n; j++)cin >> arr[i][j], mx = max(mx, arr[i][j]);
-
-		ans[i] = mx;
-
-	}
-
-	for (int i = 0; i < n; i++) {
-
-		if (ans[i] == n - 1 && vis)cout << n << " ";
-
-		else cout << ans[i] << " ";
-
-		if (ans[i] == n - 1)vis = 1;
-
-	}
-
-	return 0;
+        }
+    }
 
 }
