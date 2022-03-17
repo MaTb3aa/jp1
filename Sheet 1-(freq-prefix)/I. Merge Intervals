@@ -1,1 +1,48 @@
+#include <bits/stdc++.h>
+#include<iostream>
+#define RT(x)           return cout<<x,0;
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+using ll = long long;
+using ld = long double;
+const ll OO = 1e18, oo = 1e12 + 21;
+const int N = 5+1e5 ;
+string ys = "YES", no = "NO";
+int main ()
+{
+
+    vector <pair<int, int >> v ;
+    int n, x, y;
+    cin >> n ;
+    for(int i=0; i<n; i++)
+    {
+        cin>> x >> y ;
+        v.push_back(make_pair(x, y));
+    }
+    // (b < c || d < a) ...
+    sort(v.begin(), v.end());
+    for(int i=0; i<v.size()-1; i++)
+    {
+        if(v[i].first  >  v[i+1].second||  v[i+1].first > v[i].second  )
+        {
+            continue ;
+
+        }
+        else
+        {
+            vector <int>p = {v[i].first, v[i].second, v[i+1].first, v[i+1].second };
+            sort(p.begin(), p.end());
+            v[i+1].first = p[0];
+            v[i+1].second = p.back();
+            v[i].first =-1;
+
+        }
+
+    }
+    sort(v.begin(), v.end());
+    for(auto t:v) if( t.first !=-1) cout << t.first << " "<<t.second << '\n';
+
+
+}
+
 
