@@ -1,0 +1,56 @@
+/*** بسم الله الرحمن الرحيم   ***/
+/***        MaTb3aa         ***/
+#define _CRT_SECURE_NO_WARNINGS
+#include<bits/stdc++.h> 
+#include<unordered_map> 
+#define endl                           '\n'
+#define Ceil(x,y)               ((x+y-1)/y)
+#define sz(s)                 (int)s.size()
+#define RT(x)             return cout<<x,0;
+#define mem(x,y)      memset(x,y,sizeof(x))
+#define lop(i,n)       for(int i=0;i<n;++i)
+#define all(v)   ((v).begin()), ((v).end())
+#define scl(x)             scanf("%lld",&x)
+#define sc(x)                scanf("%d",&x)
+#define watch(x) cout<<(#x)<<" = "<<x<<endl
+#define test int t;cin>>t;while(t--)
+int dx[] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+int dy[] = { 1, -1, 0, 0, -1, 1, 1, -1 };
+const double PI = acos(-1), EPS = 1e-7;
+const int OO = 0x3f3f3f3f, N = 200000 + 5, mod = 1e9 + 7;
+using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+
+ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
+ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
+void file() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    //freopen("output.txt", "w", stdout);
+#endif  !ONLINEJUDGE
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+}
+
+int main() {
+	file();
+    int n, k;
+    cin >> n >> k;
+    string s,d=""; cin >> s;
+    map<char, int>mp;
+    for (auto t : s)mp[t]++;
+    for (auto &t : mp) {
+        int cur = min(k, t.second);
+        k -= cur; t.second -= cur;
+        if (!k)break;
+    }
+    for(int i=n-1;i>=0;i--) {
+        if (mp[s[i]] > 0)d +=s[i], mp[s[i]]--;
+    }
+    reverse(all(d));
+    RT(d);
+}
+
+
+
+ 
