@@ -1,0 +1,49 @@
+#include <iostream>
+
+#include <algorithm>
+
+#include <stack>
+
+#define ll long long 
+
+#define fast  ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+using namespace std ; 
+
+int main()
+
+{ 
+
+     fast 
+
+      string s ;  cin>>s; 
+
+      stack<char>st; 
+
+      int c=0; 
+
+      for(auto it: s)
+
+      {
+
+      	if (it=='(') st.push('(');       	else
+
+      	 {
+
+      	 	if (!st.empty())
+
+      	 	 {
+
+      	 	 	c++; 
+
+      	 	 	st.pop(); 
+
+      	 	 }
+
+      	 }
+
+      }
+
+      cout<<c*2; 
+
+}
