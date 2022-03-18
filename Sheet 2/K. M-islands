@@ -1,0 +1,147 @@
+/***  بسم الله الرحمن ا لرحيم   ***/
+
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<bits/stdc++.h>
+
+#include<unordered_map>
+
+#define endl                         '\n'
+
+#define Ceil(x,y)             ((x+y-1)/y)
+
+#define sz(s)               (int)s.size()
+
+#define RT(x)           return cout<<x,0;
+
+#define mem(x,y)    memset(x,y,sizeof(x))
+
+#define all(v) ((v).begin()), ((v).end())
+
+#define watch(x) cout<<#x<<" = { "<<x<<" }\n"
+
+#define test int t;cin>>t;while(t--)
+
+const int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
+
+const int dy[] = { 1, 0, -1, 0, 1, -1, 1, -1 };
+
+const double PI = acos(-1), EPS = 1e-7;
+
+const int OO = 0x3f3f3f3f, N = 4e6 + 5, mod = 1e9 + 7;
+
+using namespace std;
+
+typedef long long ll;
+
+typedef unsigned long long ull;
+
+ll gcd(ll x, ll y) { return (!y) ? x : gcd(y, x % y); }
+
+ll lcm(ll x, ll y) { return ((x / gcd(x, y)) * y); }
+
+void file() {
+
+#ifndef ONLINE_JUDGE
+
+	freopen("input.txt", "r", stdin);	freopen("output.txt", "w", stdout);
+
+#endif  !ONLINEJUDGE
+
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+}
+
+int f[N];
+
+int main() {
+
+	file();
+
+	int n, m;
+
+	cin >> n >> m;
+
+	int st = -1, ed = -1;
+
+	vector<pair<int, int>>v,vv;
+
+	while (n--) {
+
+		int l, r;
+
+		cin >> l >> r;
+
+		vv.push_back({ l,r });
+
+		
+
+	}
+
+	sort(all(vv));
+
+	for (auto t : vv) {
+
+		int l, r;
+
+		l = t.first; r = t.second;
+
+		if (st == -1 && ed == -1)st = l, ed = r;
+
+		else if (ed >= l)ed = max(ed, r);
+
+		else {
+
+			v.push_back({ st,ed });
+
+			st = l, ed = r;
+
+		}
+
+	}
+
+	v.push_back({ st,ed });
+
+//	for (auto t : v)cout << t.first << " " << t.second << endl;
+
+	int q; cin >> q;
+
+	while (q--) {
+
+		int l, r;
+
+		cin >> l >> r;
+
+		if (l > r)swap(l, r);
+
+		bool k = 0;
+
+		int st = 0, ed = sz(v)-1, cur=0, md;
+
+		while (st <= ed) {
+
+			md = st + ed >> 1;
+
+		//	cout << md << " " << v[md].first << " " << v[md].second << endl;
+
+			if (v[md].first <= l) {
+
+				st = md + 1;
+
+				cur = md;
+
+			}
+
+			else ed = md - 1;
+
+		}
+
+		if (v[cur].first <= l && v[cur].second >= r)cout << "YES\n";
+
+		else cout << "NO\n";
+
+	}
+
+	return 0;
+
+}
