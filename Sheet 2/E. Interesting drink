@@ -1,0 +1,75 @@
+/* اللهم صلي وسلم وبارك على سيدنا محمد */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define ll long long
+
+#define loop(n)       for(int i = 0; i < (n); i++)
+
+#define lp(x, s, e)   for(int x = s; x < (e); x++)
+
+#define lpe(x, s, e)  for(int x = s; x <= (e); x++)
+
+#define  mp make_pair
+
+#define  pb push_back
+
+#define  all(a)   a.begin(), a.end()
+
+#define  clr(x, val) memset((x), (val), sizeof(x))
+
+#define  el  '\n'
+
+void zeyad()
+
+{
+
+    ios_base::sync_with_stdio(0);
+
+    cin.tie(0);
+
+    cout.tie(0);
+
+#ifndef ONLINE_JUDGE
+
+    //freopen("input.txt", "r", stdin);
+
+#endif // ONLINE_JUDGE
+
+}
+
+int arr[1000];
+
+int main()
+
+{
+
+    zeyad();
+
+    ll n, a , b ; cin>>n;
+
+     vector<int>v(n);
+
+     for (int i= 0 ; i<n ; i++)
+
+        cin>>v[i];
+
+        sort(v.begin(),v.end());
+
+     cin>>a;
+
+     while(a--){
+
+        cin>>b;
+
+         vector<int>::iterator x;
+
+         x=upper_bound(v.begin(),v.end(),b);
+
+        cout<<(x-v.begin())<<el;
+
+     }
+
+}
